@@ -1,9 +1,10 @@
-#include <windows.h>	// 윈도우 헤더파일
+#include <windows.h>									// 윈도우 헤더파일
 
 LRESULT CALLBACK WndProc(HWND, UINT, WPARAM, LPARAM);
-HINSTANCE g_hInst;								// 인스턴스 핸들
-LPCTSTR lpszClass = TEXT("김지현_25311004");		// 제목 표시줄에 표시되는 내용
+HINSTANCE g_hInst;										// 인스턴스 핸들
+LPCTSTR lpszClass = TEXT("김지현_25311004");				// 제목 표시줄에 표시되는 내용
 
+// 윈도우 메인 함수 - 기본적인 창 제작
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdParam, int nCmdShow)
 {
 	HWND hWnd;											// 윈도우 핸들 선언
@@ -11,6 +12,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdPa
 	WNDCLASS WndClass;									// Windows Class 구조체 변수 선언
 	g_hInst = hInstance;								// hInstance값을 외부에서도 사용할 수 있도록 전역변수에 값을 저장
 
+	// 윈도우 창 설정
 	WndClass.cbClsExtra = 0;							// 예약 영역. 지금은 사용 X
 	WndClass.cbWndExtra = 0;							// 예약 영역
 	WndClass.hbrBackground = (HBRUSH)GetStockObject(WHITE_BRUSH);	// 윈도우의 배경 색상을 지정
@@ -31,7 +33,8 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdPa
 
 	ShowWindow(hWnd, nCmdShow);
 
-	// 메세지 루프를 실행
+	// 메세지 루프를 실행 (중요)
+	// 메세지가 없을 때까지 처리
 	while (GetMessage(&Message, NULL, 0, 0)) 			// Queue에 있는 메세지를 읽어들인다
 	{
 		TranslateMessage(&Message);						// 키보드 입력 메세지를 가공하여 프로그램에서 쉽게
@@ -41,11 +44,14 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpszCmdPa
 	return (int)Message.wParam;							// 탈출 코드. 프로그램 종료
 }
 
+// 윈도우 프로시저 함수
+// 작업하고자 하는 내용(키 입력)을 처리하는 함수
 LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 {
 	HDC hdc;
 
-	switch (iMessage)
+	// 키 입력 처리
+	switch (iMessage)	// iMessage: 입력된 키
 	{
 	case WM_DESTROY:			// 윈도우 종료 시 (창을 닫을 때 발생하는 메세지)
 		PostQuitMessage(0);		// 메세지 큐에 종료 메세지 전달
