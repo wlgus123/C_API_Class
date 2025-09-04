@@ -123,6 +123,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="20250828.cpp" />
+    <ClCompile Include="20250904.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="startCode.cpp" />
   </ItemGroup>
