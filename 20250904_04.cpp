@@ -57,6 +57,20 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 	case WM_PAINT:
 		hdc = BeginPaint(hWnd, &ps);
 
+		SetPixel(hdc, 10, 10, RGB(255, 0, 0));
+
+		MoveToEx(hdc, 50, 50, NULL);
+		LineTo(hdc, 300, 90);
+
+		Rectangle(hdc, 50, 100, 200, 180);
+
+		RoundRect(hdc, 300, 200, 400, 280, 20, 20);
+
+		Ellipse(hdc, 220, 100, 400, 200);
+
+		EndPaint(hWnd, &ps);
+		return 0;
+
 	case WM_DESTROY:			// 윈도우 종료 시 (창을 닫을 때 발생하는 메세지)
 		PostQuitMessage(0);		// 메세지 큐에 종료 메세지 전달
 		return 0;
