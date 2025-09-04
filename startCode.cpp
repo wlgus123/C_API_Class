@@ -68,7 +68,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 		return 0;
 
 	case WM_LBUTTONDOWN:	// 마우스 좌클릭 했을 때
-		i = true;
+		i = !i;
 		InvalidateRect(hWnd, NULL, TRUE);	
 		// -> 창에 있는 글씨들을 지우고 case WM_PAINT: 조건문으로 이동
 		hdc = GetDC(hWnd);	// 현재 활성화 되어있는 창에 DC를 가져옴
