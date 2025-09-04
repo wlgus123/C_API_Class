@@ -57,16 +57,25 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 	case WM_PAINT:
 		hdc = BeginPaint(hWnd, &ps);
 
+		// 빨간색 점 출력
 		SetPixel(hdc, 10, 10, RGB(255, 0, 0));
 
 		MoveToEx(hdc, 50, 50, NULL);
+		// 시작점을 (50, 50)으로 설정
 		LineTo(hdc, 300, 90);
+		// 시작점(50, 50)에서 (300, 90)까지 선 그리기
 
 		Rectangle(hdc, 50, 100, 200, 180);
+		// (50, 100)은 시작점, (200, 180)은 도착점으로
+		// 시작점과 도착점을 사각형으로 이음
 
 		RoundRect(hdc, 300, 200, 400, 280, 20, 20);
+		// 왼쪽 위 점, 오른쪽 아래 점을 사각형으로 이음
+		// 사각형을 20만큼 둥글게
 
 		Ellipse(hdc, 220, 100, 400, 200);
+		// 타원 그리기
+		// 시작점(220, 100)과 도착점(400, 200)까지 그려진 사각형의 크기만큼 원이 그려짐
 
 		EndPaint(hWnd, &ps);
 		return 0;
