@@ -50,7 +50,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 {
 	HDC hdc;
 	static PAINTSTRUCT ps;
-	static int pos = 50;
+	static int clickCnt = 0;
+	static int x = 100;
+	static int y = 200;
+	static const int plusPos = 10;	// 원 출력 증가값
 	static bool isClickL = false;
 
 	// 키 입력 처리
@@ -58,7 +61,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 	{
 	case WM_LBUTTONDOWN:	// 마우스 좌클릭 했을 때
 		isClickL = true;	// 좌클릭 상태 참으로 변경
-		pos += 10;	// 좌표 증가
+		++clickCnt;	// 클릭 횟수 증가
 		InvalidateRect(hWnd, NULL, FALSE);
 		return 0;
 
@@ -67,8 +70,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 		// 그리기
 		if(isClickL)	// 좌클릭 상태일 경우
 		{
-			isClickL = false;	// 거짓으로 변경
-			Ellipse(hdc, 100 + pos, 100 + pos, 200 + pos, 200 + pos);
+			for(int i = 1; i <= clickCnt; i++)
+			{
+				Ellipse(hdc, x + (plusPos * i), x + (plusPos * i), y + (plusPos * i), y + (plusPos * i));
+			}
 		}
 		EndPaint(hWnd, &ps);
 		return 0;
