@@ -65,7 +65,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 
 	case WM_LBUTTONDOWN:
 		// 메세지 박스 출력
-		MessageBox(hWnd, TEXT("마우스 왼쪽 버튼을 눌렀습니다."), TEXT("메시지 박스"), MB_OK);
+		MessageBox(hWnd, TEXT("마우스 왼쪽 버튼을 눌렀습니다."), TEXT("메시지 박스"), MB_OKCANCEL);
 		// MB_OK: 메세지박스의 버튼 (확인 버튼)
 		return 0;
 
