@@ -53,6 +53,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 	// 이벤트가 발생했을 때 다른 정보를 받아오는 변수들
 	HDC hdc;			// Device Context Handle 창 안의 영역을 가져오는 변수
 	PAINTSTRUCT ps;		// 그리는 변수
+	static bool i = false;
 
 	// 키 입력 처리
 	switch (iMessage)	// iMessage: 입력된 키
@@ -67,6 +68,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 		return 0;
 
 	case WM_LBUTTONDOWN:	// 마우스 좌클릭 했을 때
+		i = true;
+		InvalidateRect(hWnd, NULL, TRUE);	
+		// -> 창에 있는 글씨들을 지우고 case WM_PAINT: 조건문으로 이동
 		hdc = GetDC(hWnd);	// 현재 활성화 되어있는 창에 DC를 가져옴
 		// 메세지 출력하기
 		TextOut(hdc, 200, 200, TEXT("Beautiful Seoul"), 15);
@@ -83,6 +87,10 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT iMessage, WPARAM wParam, LPARAM lParam)
 		hdc = BeginPaint(hWnd, &ps);							// 그리기 시작
 		// BeginPaint(), EndPaint() 사이에 그려야 할 것 작업
 		TextOut(hdc, 100, 100, TEXT("Beautiful Korea"), 15);	// 글씨 위치 설정 및 출력하기. 15는 글자 수
+		if(i)	// 마우스 좌클릭 시 창 크기조절 했을 때, 글자 출력되게
+		{
+			TextOut(hdc, 200, 200, TEXT("Beautiful Seoul"), 15);
+		}
 		EndPaint(hWnd, &ps);									// BeginPaint()가 있으면 EndPaint()도 있어야 함
 		return 0;
 
